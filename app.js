@@ -1,31 +1,31 @@
-// Webflow's own CSS already shows the mobile menu via the
-// `[data-nav-menu-open]{display:block!important}` rule (kept in style.css) --
-// webflow.js used to toggle that attribute on click, so app.js just does the same thing.
-const hamburger = document.querySelector('.hamburger-menu-wrapper');
-const navMenu = document.querySelector('.header-nav-menu-wrapper');
+const menuBtn = document.getElementById('mobileMenuBtn');
+const menuOverlay = document.getElementById('mobileNavOverlay');
 
-if (hamburger && navMenu) {
-  hamburger.addEventListener('click', () => {
-    const isOpen = navMenu.hasAttribute('data-nav-menu-open');
-    if (isOpen) {
-      navMenu.removeAttribute('data-nav-menu-open');
-      hamburger.classList.remove('w--open');
-    } else {
-      navMenu.setAttribute('data-nav-menu-open', '');
-      hamburger.classList.add('w--open');
-    }
+if (menuBtn && menuOverlay) {
+  const closeMenu = () => {
+    menuBtn.classList.remove('is-open');
+    menuOverlay.classList.remove('is-open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+  const openMenu = () => {
+    menuBtn.classList.add('is-open');
+    menuOverlay.classList.add('is-open');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+  menuBtn.addEventListener('click', () => {
+    if (menuOverlay.classList.contains('is-open')) closeMenu();
+    else openMenu();
   });
-  navMenu.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => {
-      navMenu.removeAttribute('data-nav-menu-open');
-      hamburger.classList.remove('w--open');
-    })
+  menuOverlay.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', closeMenu)
   );
 }
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const revealTargets = document.querySelectorAll(
-  '.section, .cta-section, .header-wrapper'
+  '.section, .cta-section'
 );
 
 if (window.gsap && !prefersReduced) {
