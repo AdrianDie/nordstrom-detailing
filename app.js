@@ -21,6 +21,8 @@ if (menuBtn && menuOverlay) {
   menuOverlay.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', closeMenu)
   );
+  const closeBtn = document.getElementById('mobileNavClose');
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 }
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

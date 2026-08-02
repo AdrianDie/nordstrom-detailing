@@ -41,6 +41,10 @@
 .mobile-nav-links{display:flex;flex-direction:column;align-items:center;gap:28px;}
 .mobile-nav-links a{color:#fff;font-family:'Schibsted Grotesk',sans-serif;font-size:26px;text-decoration:none;}
 .mobile-nav-links a.mobile-nav-cta{background:var(--accent--primary-1,#1557ff);color:#fff;padding:14px 32px;border-radius:6px;font-size:16px;font-weight:700;margin-top:12px;}
+.mobile-nav-close{position:absolute;top:24px;right:24px;width:44px;height:44px;background:none;border:none;padding:0;cursor:pointer;z-index:1;}
+.mobile-nav-close span{position:absolute;top:50%;left:50%;width:26px;height:2px;background:#fff;border-radius:2px;}
+.mobile-nav-close span:first-child{transform:translate(-50%,-50%) rotate(45deg);}
+.mobile-nav-close span:last-child{transform:translate(-50%,-50%) rotate(-45deg);}
 @media (max-width:991px){
 .mobile-menu-btn{display:flex;}
 }
@@ -240,6 +244,10 @@
 </footer>
 </div>
 <div class="mobile-nav-overlay" id="mobileNavOverlay">
+<button class="mobile-nav-close" id="mobileNavClose" type="button" aria-label="Lukk meny">
+<span></span>
+<span></span>
+</button>
 <nav class="mobile-nav-links">
 <a href="#">Forsiden</a>
 <a href="#om-oss">Om oss</a>
